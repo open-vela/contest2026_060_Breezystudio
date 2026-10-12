@@ -1,0 +1,44 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+menuconfig CONTEST_LAUNCHER
+	bool "Vela Launcher - LVGL App Launcher"
+	default n
+	depends on GRAPHICS_LVGL
+	depends on SYSTEM_NXPLAYER
+	---help---
+		A beautiful LVGL-based application launcher for Gemini-S1.
+		Features:
+		  - Icon grid with multi-page support
+		  - Builtin app discovery (NuttX tasks)
+		  - SD card app loading via manifest.json
+		  - SD card audio player with file browser
+		  - Status bar with clock
+		  - Touch and button navigation
+
+if CONTEST_LAUNCHER
+
+config CONTEST_LAUNCHER_PRIORITY
+	int "Launcher task priority"
+	default 100
+
+config CONTEST_LAUNCHER_STACKSIZE
+	int "Launcher stack size"
+	default 32768
+
+config CONTEST_LAUNCHER_INPUT_DEVPATH
+	string "Touchscreen device path"
+	default "/dev/input0"
+	depends on INPUT_TOUCHSCREEN
+	---help---
+		The path to the touchscreen device. Default: "/dev/input0"
+
+config CONTEST_LAUNCHER_AUTOSTART
+	bool "Auto-start launcher on boot"
+	default n
+	---help---
+		If enabled, the launcher will start automatically after boot.
+
+endif # CONTEST_LAUNCHER

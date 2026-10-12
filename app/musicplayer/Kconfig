@@ -1,0 +1,23 @@
+#
+# Music Player Kconfig
+#
+menuconfig CONTEST_MUSICPLAYER
+	bool "Vela Music Player"
+	default n
+	depends on GRAPHICS_LVGL
+	depends on SYSTEM_NXPLAYER
+	---help---
+		Dedicated music player for Gemini-S1.
+		Features: SD card browser, MP3/WAV playback, file navigation.
+
+if CONTEST_MUSICPLAYER
+
+config CONTEST_MUSICPLAYER_PRIORITY
+	int "Task priority"
+	default 100
+
+config CONTEST_MUSICPLAYER_STACKSIZE
+	int "Stack size"
+	default 32768
+
+endif
